@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Casamento Rafael e Nicolly</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <style>
+        :root {
+            --primary: #d4af37; /* Dourado */
+            --primary-dark: #b5952f;
+            --bg: #fafafa;
+            --text: #333;
+            --white: #fff;
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; outline: none; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Header Personalizado --- */
+        header {
+            background: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+        }
+
+        @media(min-width: 768px) {
+            header {
+                padding: 80px 40px;
+            }
+            h1 {
+                font-size: 3rem;
+                letter-spacing: 2px;
+            }
+        }
+
+        .info-block {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .highlight-date {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Link do Restaurante */
+        .restaurant-btn {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .restaurant-btn:hover { color: var(--primary-dark); }
+
+        /* --- Grid de Presentes --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .gifts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media(min-width: 600px) { 
+            .gifts-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 30px;
+            } 
+        }
+        @media(min-width: 900px) { 
+            .gifts-grid { 
+                grid-template-columns: repeat(3, 1fr); 
+            }
+            .container {
+                padding: 60px 40px;
+            }
+        }
+        @media(min-width: 1200px) { 
+            .gifts-grid { 
+                grid-template-columns: repeat(4, 1fr); 
+            } 
+        }
+
+        .gift-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gift-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .gift-image-box {
+            width: 100%;
+            height: 180px;
+            background: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gift-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-card:hover .gift-image-box img {
+            transform: scale(1.05);
+        }
+
+        @media(min-width: 900px) {
+            .gift-image-box {
+                height: 220px;
+            }
+        }
+
+        .gift-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .gift-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 5px; }
+        .gift-description { font-size: 0.9rem; color: #666; margin-bottom: 10px; line-height: 1.4; }
+        .gift-price { color: var(--primary); font-weight: 700; font-size: 1.2rem; margin-bottom: 15px; }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            -webkit-tap-highlight-color: transparent;
+            transition: all 0.2s;
+        }
+
+        .btn-gift { 
+            background-color: var(--primary); 
+            color: var(--white);
+        }
+        .btn-gift:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+        .btn-confirm { 
+            background: var(--primary); 
+            color: white; 
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+        }
+        .btn-confirm:hover {
+            animation: none;
+            background: var(--primary-dark);
+        }
+        .btn-card {
+            background: #000000;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .btn-card:hover {
+            background: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .btn-copy { 
+            background: var(--primary); 
+            color: white;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+        }
+        
+        .payment-divider {
+            text-align: center;
+            margin: 15px 0;
+            color: #999;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        .payment-divider::before,
+        .payment-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #ddd;
+        }
+        .payment-divider::before { left: 0; }
+        .payment-divider::after { right: 0; }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 6px rgba(212, 175, 55, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* --- Modal de Pagamento --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--white);
+            z-index: 100;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-content {
+            background: var(--white);
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: 40vh;
+            min-height: 250px;
+            max-height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media(min-width: 768px) {
+            .modal-image {
+                height: 50vh;
+                max-height: 500px;
+            }
+        }
+        
+        .modal-body {
+            flex: 1;
+            padding: 30px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @media(min-width: 768px) {
+            .modal-body {
+                padding: 40px 60px;
+                max-width: 700px;
+            }
+        }
+        
+        .quantity-section {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 0;
+            margin: 20px 0;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .quantity-label {
+            text-align: left;
+            font-size: 0.7rem;
+            color: #999;
+            margin-bottom: 5px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .quantity-control {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            background: #f5f5f5;
+            border-radius: 50px;
+            padding: 3px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--white);
+            color: var(--primary);
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+            font-weight: 400;
+            line-height: 1;
+        }
+        
+        .qty-btn:hover:not(:disabled) {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .qty-btn:active:not(:disabled) {
+            transform: scale(0.95);
+        }
+        
+        .qty-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .qty-display {
+            font-size: 0.95rem;
+            font-weight: 600;
+            min-width: 35px;
+            text-align: center;
+            color: #333;
+            padding: 0 6px;
+        }
+        
+        .quantity-wrapper {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        
+        .price-wrapper {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .total-price {
+            text-align: left;
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            padding: 0;
+            background: var(--white);
+            border-radius: 0;
+            margin: 0;
+            line-height: 1;
+        }
+        
+        .total-label {
+            font-size: 0.7rem;
+            color: #999;
+            font-weight: 400;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .close-modal {
+            position: fixed;
+            top: 20px; 
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: #f0f0f0;
+            color: #666;
+            border-radius: 50%;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 101;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .close-modal:hover {
+            background: #e0e0e0;
+            color: #333;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* Área de input e textarea */
+        .input-group { 
+            text-align: left; 
+            margin-bottom: 25px; 
+            margin-top: 30px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.2s;
+        }
+        textarea:focus { 
+            border-color: var(--primary); 
+            outline: none;
+        }
+        
+        label { 
+            display: block; 
+            margin-bottom: 10px; 
+            font-weight: 600; 
+            color: #333;
+            font-size: 1rem;
+        }
+
+        /* Pix Result */
+        .pix-result { display: none; margin-top: 20px; text-align: center; border-top: 1px dashed #ddd; padding-top: 20px; }
+        canvas#qr-code { width: 200px !important; height: 200px !important; margin: 0 auto 15px auto; display: block; }
+        .copy-box {
+            background: #f4f4f4; padding: 12px; border-radius: 8px; font-family: monospace;
+            font-size: 0.8rem; word-break: break-all; margin-bottom: 15px; color: #555;
+            border: 1px solid #ddd; max-height: 60px; overflow-y: scroll;
+        }
+
+        /* Modal Pix */
+        .pix-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--white);
+            z-index: 200;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .pix-modal-content {
+            background: var(--white);
+            width: 100%;
+            min-height: 100vh;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 80px 30px 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media(min-width: 768px) {
+            .pix-modal-content {
+                padding: 100px 60px 60px;
+                max-width: 750px;
+            }
+        }
+
+        .pix-modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 30px 0 15px 0;
+            text-align: center;
+            word-wrap: break-word;
+            padding: 0 10px;
+        }
+
+        .pix-modal-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 40px;
+            text-align: center;
+            line-height: 1.5;
+            padding: 0 10px;
+        }
+
+        .pix-qr-container {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 3px solid var(--primary);
+        }
+
+        #pixQrCode {
+            width: 280px !important;
+            height: 280px !important;
+            margin: 0 auto;
+            display: block;
+        }
+
+        @media(min-width: 768px) {
+            #pixQrCode {
+                width: 320px !important;
+                height: 320px !important;
+            }
+        }
+
+        .pix-code-section {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        @media(min-width: 768px) {
+            .pix-code-section {
+                max-width: 600px;
+            }
+        }
+
+        .pix-code-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .pix-code-box {
+            background: #f8f8f8;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            word-break: break-all;
+            margin-bottom: 15px;
+            color: #555;
+            border: 2px solid #e0e0e0;
+            max-height: 40px;
+            overflow: hidden;
+            text-align: left;
+            line-height: 1.4;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .pix-btn-copy {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.2s;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+        }
+
+        .pix-btn-copy:hover {
+            background: var(--primary-dark);
+            animation: none;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        @media(min-width: 768px) {
+            .pix-btn-copy {
+                max-width: 500px;
+                padding: 18px 50px;
+                font-size: 1.15rem;
+            }
+        }
+
+        .close-pix-modal {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: #f0f0f0;
+            color: #666;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border: 2px solid #e0e0e0;
+            z-index: 201;
+        }
+
+        .close-pix-modal:hover {
+            background: #e0e0e0;
+            color: #333;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .pix-info-text {
+            font-size: 0.85rem;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        @media(max-width: 600px) {
+            #pixQrCode {
+                width: 240px !important;
+                height: 240px !important;
+            }
+            .pix-qr-container {
+                padding: 20px;
+            }
+            .pix-modal-content {
+                padding: 80px 20px 40px;
+            }
+            .pix-modal-title {
+                font-size: 1.5rem;
+            }
+            .pix-modal-subtitle {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* --- Carrossel de Fotos (Restaurante) --- */
+        .carousel-overlay {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .carousel-prev, .carousel-next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.6s ease;
+            user-select: none;
+            background-color: rgba(0,0,0,0.3);
+            text-decoration: none;
+        }
+        .carousel-next { right: 0; border-radius: 3px 0 0 3px; }
+        .carousel-prev { left: 0; border-radius: 0 3px 3px 0; }
+        .close-carousel {
+            position: absolute; top: 20px; right: 30px;
+            color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 201;
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 40px 20px; 
+            color: #999; 
+            font-size: 0.8rem; 
+        }
+
+        @media(min-width: 768px) {
+            footer {
+                padding: 60px 40px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Rafael e Nicolly</h1>
+        <div class="info-block">
+            <span class="highlight-date">07 de Fevereiro</span>
+            <p>Almoço as 11:30h</p>
+            <p>Rua João Jacob Manfron Neto Lavrinha<br>Campo Magro - PR, 83535-000</p>
+            
+            <div class="restaurant-btn" onclick="openCarousel()">
+                📍 RESTAURANTE PEDRA CHATA (Ver Fotos)
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="gifts-grid" id="gifts-grid"></div>
+    </div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">✕</span>
+            
+            <img id="modalImage" class="modal-image" src="" alt="">
+            
+            <div class="modal-body">
+                <h2 id="modalTitle" style="margin:0 0 10px 0; color:var(--primary); text-align:center; font-size:1.8rem;">Nome do Presente</h2>
+                <p id="modalDescription" style="text-align:center; color:#666; margin-bottom:25px; line-height:1.6; font-size:1rem;"></p>
+                
+                <div class="quantity-section">
+                    <div class="price-wrapper">
+                        <div class="total-label">Valor Total</div>
+                        <div class="total-price" id="totalPrice">R$ 0,00</div>
+                    </div>
+                    <div class="quantity-wrapper">
+                        <div class="quantity-label">Quantidade</div>
+                        <div class="quantity-control">
+                            <button class="qty-btn" onclick="decreaseQuantity()">−</button>
+                            <div class="qty-display" id="quantity">1</div>
+                            <button class="qty-btn" onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step1">
+                    <div class="input-group">
+                        <label>💌 Deixe uma mensagem carinhosa para o casal:</label>
+                        <textarea id="guestMessage" placeholder="Escreva seus votos de felicidade para Rafael e Nicolly..."></textarea>
+                    </div>
+                    <button class="btn-confirm" onclick="generatePix()">
+                        <svg width="20" height="20" viewBox="0 0 512 512" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+                            <path d="M242.4 292.5C247.8 287.1 257.1 287.1 262.5 292.5L339.5 369.5C353.7 383.7 372.6 391.5 392.6 391.5H407.7L310.6 488.6C280.3 518.1 231.1 518.1 200.8 488.6L103.3 391.5H112.6C132.6 391.5 151.5 383.7 165.7 369.5L242.4 292.5zM262.5 218.9C256.1 224.4 247.9 224.5 242.4 218.9L165.7 142.2C151.5 127.1 132.6 120.2 112.6 120.2H103.3L200.7 22.76C231.1-7.586 280.3-7.586 310.6 22.76L407.8 120.2H392.6C372.6 120.2 353.7 127.1 339.5 142.2L262.5 218.9zM112.6 142.7C126.4 142.7 139.1 148.3 149.7 158.1L226.4 234.8C233.6 241.1 243 245.6 252.5 245.6C261.9 245.6 271.3 241.1 278.5 234.8L355.5 157.8C365.3 148.1 378.8 142.5 392.6 142.5H430.3L488.6 200.8C518.9 231.1 518.9 280.3 488.6 310.6L430.3 368.9H392.6C378.8 368.9 365.3 363.3 355.5 353.5L278.5 276.5C271.3 270.1 261.9 265.6 252.5 265.6C243 265.6 233.6 270.1 226.4 276.5L149.7 353.2C139.1 363 126.4 368.6 112.6 368.6H80.78L22.76 310.6C-7.586 280.3-7.586 231.1 22.76 200.8L80.78 142.7H112.6z"/>
+                        </svg>
+                        Pagar Com Pix
+                    </button>
+                    <div class="payment-divider">ou</div>
+                    <button class="btn-card" onclick="payWithCard()">💳 Pagar com Cartão</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pix -->
+    <div class="pix-modal-overlay" id="pixModal">
+        <button class="close-pix-modal" onclick="closePixModal()">✕</button>
+        
+        <div class="pix-modal-content">
+            <h2 class="pix-modal-title">🎁 Pagamento via Pix</h2>
+            <p class="pix-modal-subtitle">Abra o aplicativo do seu banco e<br>escaneie o QR Code abaixo</p>
+            
+            <div class="pix-qr-container">
+                <canvas id="pixQrCode"></canvas>
+            </div>
+            
+            <div class="pix-code-section">
+                <p class="pix-code-label">Ou copie o código Pix Copia e Cola:</p>
+                <div class="pix-code-box" id="pixCodeText"></div>
+                
+                <button class="pix-btn-copy" onclick="copyPixCode()">
+                    📋 Copiar Código Pix
+                </button>
+            </div>
+            
+            <p class="pix-info-text">
+                Após realizar o pagamento,<br>
+                O presente será registrado em nosso sistema.<br> Muito Obrigado pelo carinho ♥️
+            </p>
+        </div>
+    </div>
+
+    <div class="carousel-overlay" id="carouselModal">
+        <span class="close-carousel" onclick="closeCarousel()">&times;</span>
+        <div class="carousel-container">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8069.jpg" alt="Restaurante 1">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8073.jpg" alt="Restaurante 2">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8079.jpg" alt="Restaurante 3">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8204.jpg" alt="Restaurante 4">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8099.jpg" alt="Restaurante 5">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8060.jpg" alt="Restaurante 6">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8039.jpg" alt="Restaurante 7">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8207.jpg" alt="Restaurante 8">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8128.jpg" alt="Restaurante 9">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8057.jpg" alt="Restaurante 10">
+            <img class="carousel-slide" src="https://restaurantepedrachata.com.br/wp-content/uploads/2024/12/Reustaurante-Pedra-Chata-8161.jpg" alt="Restaurante 11">
+
+
+
+            <a class="carousel-prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="carousel-next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </div>
+
+    <footer>Criado com carinho por Rafael e Nicolly.</footer>
+
+    <script>
+        // CONFIGURAÇÕES
+        const PIX_KEY = "58307541000147"; 
+        const MERCHANT_NAME = "RAFAEL MARTINS DA SILVA"; 
+        const MERCHANT_CITY = "CURITIBA"; 
+        
+        // LISTA DE PRESENTES
+        const gifts = [
+            { title: "1kg de café", price: 492.00, img: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400", description: "Café especial para começar o dia com energia" },
+            { title: "1 mês de almoço garantido em casa", price: 400.00, img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400", description: "Refeições deliciosas para o casal por um mês inteiro" },
+            { title: "Academia para os noivos entrarem em forma depois da lua de mel", price: 480.00, img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400", description: "Ajude os noivos a manterem a forma depois das férias" },
+            { title: "Acessório de última geração para cuidar da casa", price: 94.00, img: "https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?w=400", description: "Tecnologia moderna para facilitar a limpeza do lar" },
+            { title: "Acessório para cortar a unha do dedão do noivo", price: 400.00, img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400", description: "Ferramenta especial para cuidados pessoais do noivo" },
+            { title: "Balança para os noivos não engordarem após o casamento", price: 80.00, img: "https://images.unsplash.com/photo-1591084728795-1149f32d9866?w=400", description: "Ajude o casal a manter o peso ideal após o casamento" },
+            { title: "Bolo de cenoura semanal para a noiva", price: 94.00, img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400", description: "Delicioso bolo de cenoura toda semana para a noiva" },
+            { title: "Camisa do time de coração para a alegria do noivo", price: 240.00, img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400", description: "Presente especial para o noivo torcer pelo seu time favorito" }
+        ];
+
+        // LÓGICA DO GRID
+        const grid = document.getElementById('gifts-grid');
+        gifts.forEach((gift, index) => {
+            const card = document.createElement('div');
+            card.className = 'gift-card';
+            const formattedPrice = gift.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            
+            card.innerHTML = `
+                <div class="gift-image-box">
+                    <img src="${gift.img}" alt="${gift.title}">
+                </div>
+                <div class="gift-info">
+                    <div>
+                        <div class="gift-title">${gift.title}</div>
+                        <div class="gift-description">${gift.description}</div>
+                        <div class="gift-price">${formattedPrice}</div>
+                    </div>
+                    <button class="btn-gift" onclick="openModal(${index})">Presentear</button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // LÓGICA DO MODAL DE PRESENTE
+        const modal = document.getElementById('modal');
+        const pixModal = document.getElementById('pixModal');
+        const step1 = document.getElementById('step1');
+        let currentPrice = 0;
+        let currentGiftName = "";
+        let currentGiftIndex = 0;
+        let quantity = 1;
+        let pixPayload = "";
+
+        function openModal(giftIndex) {
+            currentGiftIndex = giftIndex;
+            const gift = gifts[giftIndex];
+            quantity = 1;
+            
+            currentPrice = gift.price;
+            currentGiftName = gift.title;
+            
+            document.getElementById('modalImage').src = gift.img;
+            document.getElementById('modalTitle').innerText = gift.title;
+            document.getElementById('modalDescription').innerText = gift.description;
+            document.getElementById('quantity').innerText = quantity;
+            updateTotalPrice();
+            
+            document.getElementById('guestMessage').value = "";
+            
+            step1.style.display = 'block';
+            modal.style.display = 'flex';
+            
+            // Bloquear scroll do body
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            
+            // Restaurar scroll do body
+            document.body.style.overflow = 'auto';
+        }
+        
+        function closePixModal() {
+            // Fechar modal do Pix
+            pixModal.style.display = 'none';
+            // Voltar para o modal do presente
+            modal.style.display = 'flex';
+            // Manter o scroll bloqueado
+        }
+        
+        function increaseQuantity() {
+            quantity++;
+            document.getElementById('quantity').innerText = quantity;
+            updateTotalPrice();
+        }
+        
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').innerText = quantity;
+                updateTotalPrice();
+            }
+        }
+        
+        function updateTotalPrice() {
+            const total = gifts[currentGiftIndex].price * quantity;
+            document.getElementById('totalPrice').innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            currentPrice = total;
+        }
+
+        // LÓGICA DO CARROSSEL
+        let slideIndex = 1;
+        const carouselModal = document.getElementById('carouselModal');
+
+        function openCarousel() {
+            carouselModal.style.display = 'flex';
+            showSlides(slideIndex);
+        }
+
+        function closeCarousel() {
+            carouselModal.style.display = 'none';
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("carousel-slide");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
+
+        // LÓGICA DO PIX (EMV)
+        class Pix {
+            constructor(key, name, city, value, description) {
+                this.key = key;
+                this.name = this.formatString(name, 25);
+                this.city = this.formatString(city, 15);
+                this.value = value.toFixed(2);
+                this.description = this.formatString(description, 25);
+            }
+
+            formatString(str, max) {
+                if(!str) return "";
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").substring(0, max);
+            }
+
+            generateID(id, value) {
+                const len = value.length.toString().padStart(2, '0');
+                return `${id}${len}${value}`;
+            }
+
+            getCRC16(payload) {
+                payload += "6304";
+                let polynomial = 0x1021;
+                let crc = 0xFFFF;
+                for (let i = 0; i < payload.length; i++) {
+                    crc ^= (payload.charCodeAt(i) << 8);
+                    for (let j = 0; j < 8; j++) {
+                        if ((crc & 0x8000) !== 0) {
+                            crc = (crc << 1) ^ polynomial;
+                        } else {
+                            crc = crc << 1;
+                        }
+                    }
+                }
+                return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+            }
+
+            getPayload() {
+                const payloadKey = this.generateID("00", "BR.GOV.BCB.PIX") + this.generateID("01", this.key);
+                const description = this.description ? this.generateID("02", this.description) : "";
+                const merchantAccount = this.generateID("26", payloadKey + description);
+                const merchantCat = this.generateID("52", "0000");
+                const currency = this.generateID("53", "986");
+                const amount = this.generateID("54", this.value);
+                const country = this.generateID("58", "BR");
+                const merchantName = this.generateID("59", this.name);
+                const merchantCity = this.generateID("60", this.city);
+                const addDataField = this.generateID("62", this.generateID("05", "CASAMENTO"));
+
+                const rawPayload = "000201" + merchantAccount + merchantCat + currency + amount + country + merchantName + merchantCity + addDataField;
+                return this.getCRC16(rawPayload);
+            }
+        }
+
+        function generatePix() {
+            const message = document.getElementById('guestMessage').value;
+            const description = currentGiftName;
+
+            const pix = new Pix(PIX_KEY, MERCHANT_NAME, MERCHANT_CITY, currentPrice, description);
+            pixPayload = pix.getPayload();
+
+            // Preencher o modal Pix
+            document.getElementById('pixCodeText').innerText = pixPayload;
+
+            new QRious({
+                element: document.getElementById('pixQrCode'),
+                value: pixPayload,
+                size: 250,
+                level: 'M'
+            });
+
+            // Fechar modal principal e abrir modal Pix
+            modal.style.display = 'none';
+            pixModal.style.display = 'flex';
+            
+            if(message) console.log("Mensagem do convidado: ", message);
+        }
+
+        function copyPixCode() {
+            const text = document.getElementById('pixCodeText').innerText;
+            const btn = document.querySelector('.pix-btn-copy');
+            
+            // Tentar copiar
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopySuccess(btn);
+                }).catch(err => {
+                    console.error('Erro ao copiar:', err);
+                    fallbackCopy(text, btn);
+                });
+            } else {
+                // Fallback para navegadores antigos
+                fallbackCopy(text, btn);
+            }
+        }
+        
+        function fallbackCopy(text, btn) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopySuccess(btn);
+            } catch (err) {
+                alert('Por favor, copie o código manualmente');
+            }
+            
+            document.body.removeChild(textarea);
+        }
+        
+        function showCopySuccess(btn) {
+            // Feedback no botão
+            const originalHTML = btn.innerHTML;
+            const originalBg = btn.style.background;
+            
+            btn.innerHTML = '✅ Código Copiado!';
+            btn.style.background = '#4caf50';
+            btn.style.transform = 'scale(1.05)';
+            btn.disabled = true;
+            
+            // Restaurar botão
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = originalBg;
+                btn.style.transform = '';
+                btn.disabled = false;
+            }, 3000);
+        }
+
+        // MERCADO PAGO - Pagamento com Cartão
+        async function payWithCard() {
+            const message = document.getElementById('guestMessage').value;
+            
+            console.log('Dados do pagamento:', {
+                title: currentGiftName,
+                price: currentPrice,
+                message: message
+            });
+            
+            try {
+                // Detectar URL atual para funcionar em localhost e rede
+                const baseUrl = window.location.origin;
+                
+                // Criar preferência de pagamento no backend
+                const response = await fetch(`${baseUrl}/create-preference`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: currentGiftName,
+                        price: currentPrice,
+                        message: message
+                    })
+                });
+
+                console.log('Response status:', response.status);
+                const data = await response.json();
+                console.log('Response data:', data);
+                
+                // Redirecionar para o Checkout Pro do Mercado Pago
+                window.location.href = data.init_point;
+                
+            } catch (error) {
+                console.error('Erro ao processar pagamento:', error);
+                alert('Erro ao processar pagamento. Por favor, tente novamente ou use o Pix.');
+            }
+        }
+
+        // Fechar modais clicando fora
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('modal')) closeModal();
+            if (event.target == document.getElementById('carouselModal')) closeCarousel();
+            if (event.target == document.getElementById('pixModal')) closePixModal();
+        }
+    </script>
+</body>
+</html>
