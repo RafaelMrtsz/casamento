@@ -339,17 +339,17 @@
         
         .modal-image {
             width: 100%;
-            height: 40vh;
-            min-height: 250px;
-            max-height: 450px;
+            height: 45vh;
+            min-height: 280px;
+            max-height: 500px;
             object-fit: cover;
             display: block;
         }
 
         @media(min-width: 768px) {
             .modal-image {
-                height: 50vh;
-                max-height: 500px;
+                height: 55vh;
+                max-height: 600px;
             }
         }
         
@@ -958,7 +958,7 @@
         
         // LISTA DE PRESENTES
         const gifts = [
-            { title: "🧪 PRESENTE DE TESTE", price: 11.00, img: "img/presentes/presente-1.jpg", description: "Presente para testar pagamentos - Valor simbólico de R$ 11,00" },
+            { title: "PRESENTE DE TESTE", price: 11.00, img: "img/presentes/presente-1.jpg", description: "Presente para testar pagamentos - Valor simbólico de R$ 11,00" },
             { title: "Seja nosso parente preferido (OPORTUNIDADE ÚNICA!!!)", price: 221.46, img: "img/presentes/presente-3.jpg", description: "Vaga VIP de parente favorito com todos os privilégios inclusos. Vagas limitadas!" },
             { title: "Taxa pra não devolver o conjuge pra sogra", price: 165.70, img: "img/presentes/presente-8.jpg", description: "Pagamento único para manter o cônjuge longe da casa da sogra permanentemente" },
             { title: "Fazer pedido de casamento na festa", price: 1500.00, img: "img/presentes/presente-1.jpg", description: "Aquele momento mágico que você sempre sonhou! Use nossa festa como cenário perfeito" },
@@ -997,9 +997,13 @@
                         <div class="gift-description">${gift.description}</div>
                         <div class="gift-price">${formattedPrice}</div>
                     </div>
-                    <button class="btn-gift" onclick="openModal(${index})">Presentear</button>
+                    <button class="btn-gift" onclick="event.stopPropagation(); openModal(${index})">Presentear</button>
                 </div>
             `;
+            
+            // Adicionar evento de clique no card inteiro
+            card.addEventListener('click', () => openModal(index));
+            
             grid.appendChild(card);
         });
 
@@ -1035,6 +1039,9 @@
             // Bloquear scroll do body
             document.body.style.overflow = 'hidden';
             
+            // Rolar para o topo do modal
+            modal.scrollTop = 0;
+            
             // Adicionar estado ao histórico para permitir voltar
             history.pushState({ modal: 'gift' }, '', '');
         }
@@ -1056,12 +1063,10 @@
             pixModal.style.display = 'none';
             // Voltar para o modal do presente
             modal.style.display = 'flex';
+            // Rolar para o topo do modal do presente
+            modal.scrollTop = 0;
             // Manter o scroll bloqueado
-            
-            // Remover do histórico se ainda estiver lá
-            if (history.state && history.state.modal === 'pix') {
-                history.back();
-            }
+            document.body.style.overflow = 'hidden';
         }
         
         function increaseQuantity() {
@@ -1195,8 +1200,7 @@
             modal.style.display = 'none';
             pixModal.style.display = 'flex';
             
-            // Adicionar estado ao histórico para modal Pix
-            history.pushState({ modal: 'pix' }, '', '');
+            // Não adicionar ao histórico - mantém o modal do presente no histórico
             
             if(message) console.log("Mensagem do convidado: ", message);
         }
