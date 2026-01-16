@@ -1334,6 +1334,17 @@
                 return;
             }
         });
+
+        // Listener para detectar quando o usuário volta à página (ex: voltando do Mercado Pago)
+        window.addEventListener('pageshow', function(event) {
+            // Esconder loading quando a página é mostrada (inclusive quando volta do navegador)
+            document.getElementById('loadingOverlay').style.display = 'none';
+        });
+
+        // Esconder loading ao carregar a página
+        window.addEventListener('load', function() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        });
     </script>
 </body>
 </html>
