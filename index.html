@@ -148,7 +148,7 @@
 
         .gift-image-box {
             width: 100%;
-            height: 180px;
+            height: 250px;
             background: #eee;
             position: relative;
             overflow: hidden;
@@ -167,7 +167,7 @@
 
         @media(min-width: 900px) {
             .gift-image-box {
-                height: 220px;
+                height: 300px;
             }
         }
 
@@ -782,6 +782,39 @@
             color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 201;
         }
 
+        /* --- Loading Spinner --- */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
         footer { 
             text-align: center; 
             padding: 40px 20px; 
@@ -909,6 +942,12 @@
         </div>
     </div>
 
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Redirecionando para pagamento...</div>
+    </div>
+
     <footer>Criado com carinho por Rafael e Nicolly.</footer>
 
     <script>
@@ -919,14 +958,15 @@
         
         // LISTA DE PRESENTES
         const gifts = [
+            { title: "🧪 PRESENTE DE TESTE", price: 11.00, img: "img/presentes/presente-1.jpg", description: "Presente para testar pagamentos - Valor simbólico de R$ 11,00" },
+            { title: "Seja nosso parente preferido (OPORTUNIDADE ÚNICA!!!)", price: 221.46, img: "img/presentes/presente-3.jpg", description: "Vaga VIP de parente favorito com todos os privilégios inclusos. Vagas limitadas!" },
+            { title: "Taxa pra não devolver o conjuge pra sogra", price: 165.70, img: "img/presentes/presente-8.jpg", description: "Pagamento único para manter o cônjuge longe da casa da sogra permanentemente" },
             { title: "Fazer pedido de casamento na festa", price: 1500.00, img: "img/presentes/presente-1.jpg", description: "Aquele momento mágico que você sempre sonhou! Use nossa festa como cenário perfeito" },
-            { title: "Um periodo inteiro da noiva em completo silencio", price: 289.90, img: "img/presentes/presente-2.jpg", description: "Experiência raríssima! Silêncio total da noiva por tempo determinado (resultado não garantido)" },
-            { title: "Seja nosso parente preferido (OPORTUNIDADE ÚNICA!!!)", price: 1350.00, img: "img/presentes/presente-3.jpg", description: "Vaga VIP de parente favorito com todos os privilégios inclusos. Vagas limitadas!" },
-            { title: "Jesus tocou meu coração, receba!", price: 157.50, img: "img/presentes/presente-4.jpg", description: "Bênçãos divinas em forma de presente. Amor e carinho multiplicados!" },
-            { title: "Dinheiros pra noiva se mimar sem culpa", price: 342.80, img: "img/presentes/presente-5.jpeg", description: "Fundos especiais para salão, spa, compras e tudo que ela merece sem ouvir reclamação" },
-            { title: "Suborno pra noiva não aceitar o buquê na sua namorada", price: 234.99, img: "img/presentes/presente-6.jpg", description: "Garantia de que sua namorada não será a próxima. Proteção total contra pressão!" },
-            { title: "Mira precisa para a noiva jogar o buquê na sua direção", price: 687.00, img: "img/presentes/presente-7.jpg", description: "Serviço de mira laser para direcionar o buquê exatamente onde você está. Sucesso garantido!" },
-            { title: "Taxa pra não devolver o conjuge pra sogra", price: 189.90, img: "img/presentes/presente-8.jpg", description: "Pagamento único para manter o cônjuge longe da casa da sogra permanentemente" },
+            { title: "Um periodo inteiro da noiva em completo silencio", price: 289.10, img: "img/presentes/presente-2.jpg", description: "Experiência raríssima! Silêncio total da noiva por tempo determinado (resultado não garantido)" },
+            { title: "Jesus tocou meu coração, receba!", price: 1000.00, img: "img/presentes/presente-4.jpg", description: "Bênçãos divinas em forma de presente. Amor e carinho multiplicados!" },
+            { title: "Dinheiros pra noiva se mimar sem culpa", price: 142.80, img: "img/presentes/presente-5.jpg", description: "Fundos especiais para salão, spa, compras e tudo que ela merece sem ouvir reclamação" },
+            { title: "Mira precisa para a noiva jogar o buquê na sua direção", price: 487.00, img: "img/presentes/presente-7.jpg", description: "Serviço de mira laser para direcionar o buquê exatamente onde você está. Sucesso garantido!" },
+            { title: "Suborno pra noiva não aceitar o buquê na sua namorada", price: 164.99, img: "img/presentes/presente-6.jpg", description: "Garantia de que sua namorada não será a próxima. Proteção total contra pressão!" },
             { title: "Um jantar italiano romântico para os noivos", price: 267.45, img: "img/presentes/presente-9.jpg", description: "Noite perfeita com vinho, massas e muito amor em um restaurante italiano autêntico" },
             { title: "Ajudar o noivo a garantir um playstation já que o yudi nunca deu", price: 1420.00, img: "img/presentes/presente-10.jpg", description: "O sonho que o Yudi destruiu finalmente será realizado! Console + jogos inclusos" },
             { title: "Garantindo o 1 mês de janta pro noivo", price: 312.20, img: "img/presentes/presente-11.jpg", description: "30 dias de jantares garantidos para o noivo não passar fome no primeiro mês de casado" },
@@ -1220,6 +1260,9 @@
         async function payWithCard() {
             const message = document.getElementById('guestMessage').value;
             
+            // Mostrar loading
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            
             console.log('Dados do pagamento:', {
                 title: currentGiftName,
                 price: currentPrice,
@@ -1252,6 +1295,8 @@
                 
             } catch (error) {
                 console.error('Erro ao processar pagamento:', error);
+                // Esconder loading em caso de erro
+                document.getElementById('loadingOverlay').style.display = 'none';
                 alert('Erro ao processar pagamento. Por favor, tente novamente ou use o Pix.');
             }
         }
